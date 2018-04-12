@@ -5,12 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
+
 /**
  * @author jinzj
  * @since v4.0.1
  */
 @Controller
 public class HelloController {
+
+    private final Map<Integer, String> map = new HashMap<>();
+    private final Random random = new Random();
 
     @RequestMapping("/hello")
     public String hello() {
@@ -34,4 +42,12 @@ public class HelloController {
     public String json() throws CommonException {
         throw new CommonException("发生错误2");
     }
+
+    @RequestMapping("/getMap")
+    public String getMap() {
+        for(;;){
+            map.put(random.nextInt(), UUID.randomUUID().toString());
+        }
+    }
+
 }
